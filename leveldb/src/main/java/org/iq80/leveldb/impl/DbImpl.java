@@ -36,6 +36,8 @@ import org.iq80.leveldb.env.DbLock;
 import org.iq80.leveldb.env.Env;
 import org.iq80.leveldb.env.File;
 import org.iq80.leveldb.env.NoOpLogger;
+import org.iq80.leveldb.env.SequentialFile;
+import org.iq80.leveldb.env.WritableFile;
 import org.iq80.leveldb.impl.Filename.FileInfo;
 import org.iq80.leveldb.impl.Filename.FileType;
 import org.iq80.leveldb.impl.WriteBatchImpl.Handler;
@@ -51,13 +53,11 @@ import org.iq80.leveldb.table.TableBuilder;
 import org.iq80.leveldb.table.UserComparator;
 import org.iq80.leveldb.util.Closeables;
 import org.iq80.leveldb.util.SafeListBuilder;
-import org.iq80.leveldb.env.SequentialFile;
 import org.iq80.leveldb.util.Slice;
 import org.iq80.leveldb.util.SliceInput;
 import org.iq80.leveldb.util.SliceOutput;
 import org.iq80.leveldb.util.Slices;
 import org.iq80.leveldb.util.Snappy;
-import org.iq80.leveldb.env.WritableFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -992,7 +992,14 @@ public class DbImpl
                 // The state of the log file is indeterminate: the log record we
                 // just added may or may not show up when the DB is re-opened.
                 // So we force the DB into a mode where all future writes fail.
-                recordBackgroundError(e);
+                mutex.lock();
+                try {
+                    //we need to be inside lock to record exception
+                    recordBackgroundError(e);
+                }
+                finally {
+                    mutex.unlock();
+                }
             }
             finally {
                 mutex.lock();
