@@ -164,8 +164,9 @@ public class DbImpl
         internalKeyComparator = new InternalKeyComparator(userComparator);
         immutableMemTable = null;
 
+        final String compactionThreadFmt = "leveldb-" + databaseDir.getName() + "-%s";
         ThreadFactory compactionThreadFactory = new ThreadFactoryBuilder()
-                .setNameFormat("leveldb-compaction-%s")
+                .setNameFormat(compactionThreadFmt)
                 .setUncaughtExceptionHandler((t, e) -> {
                     mutex.lock();
                     try {
