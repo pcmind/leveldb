@@ -128,7 +128,7 @@ public class DbImpl
 
     private ManualCompaction manualCompaction;
 
-    private CompactionStats[] stats = new CompactionStats[DbConstants.NUM_LEVELS];
+    private final CompactionStats[] stats = new CompactionStats[DbConstants.NUM_LEVELS];
 
     public DbImpl(Options rawOptions, String dbname, Env env)
             throws IOException
@@ -154,13 +154,10 @@ public class DbImpl
 
         //use custom comparator if set
         DBComparator comparator = options.comparator();
-        UserComparator userComparator;
-        if (comparator != null) {
-            userComparator = new CustomUserComparator(comparator);
-        }
-        else {
-            userComparator = new BytewiseComparator();
-        }
+        UserComparator userComparator = (comparator != null)
+               ? new CustomUserComparator(comparator)
+               : new BytewiseComparator();
+
         internalKeyComparator = new InternalKeyComparator(userComparator);
         immutableMemTable = null;
 

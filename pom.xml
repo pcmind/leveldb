@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -8,14 +9,19 @@
         <version>100</version>
     </parent>
 
-    <groupId>io.github.pcmind</groupId>
+    <groupId>com.brinqa</groupId>
     <artifactId>leveldb-project</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.2.5-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Port of LevelDB to Java</description>
-    <url>http://github.com/pcmind/leveldb</url>
+    <scm>
+        <connection>scm:git:git@github.com:brinqa/leveldb.git</connection>
+        <developerConnection>scm:git:git@github.com:brinqa/leveldb.git</developerConnection>
+        <url>https://github.com/brinqa/leveldb</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <modules>
         <module>leveldb-api</module>
@@ -24,7 +30,6 @@
     </modules>
 
     <inceptionYear>2011</inceptionYear>
-
     <licenses>
         <license>
             <name>Apache License 2.0</name>
@@ -53,13 +58,6 @@
         </developer>
     </developers>
 
-    <scm>
-        <connection>scm:git:git://github.com/pcmind/leveldb.git</connection>
-        <developerConnection>scm:git:git@github.com:pcmind/leveldb.git</developerConnection>
-        <url>http://github.com/pcmind/leveldb/tree/master</url>
-      <tag>HEAD</tag>
-    </scm>
-
     <properties>
         <air.checkstyle.config-file>src/checkstyle/checks.xml</air.checkstyle.config-file>
         <air.license.header-file>src/license/LICENSE-HEADER.txt</air.license.header-file>
@@ -78,13 +76,13 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.github.pcmind</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>leveldb-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>io.github.pcmind</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>leveldb</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -103,6 +101,13 @@
                 <version>4.3.0</version>
                 <configuration>
                     <repoToken>${converallstoken}</repoToken>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>

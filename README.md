@@ -1,8 +1,4 @@
 # LevelDB in Java
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.pcmind/leveldb/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.pcmind/leveldb)
-[![TravisCI Build Status](https://travis-ci.org/pcmind/leveldb.svg?branch=master)](https://travis-ci.org/pcmind/leveldb)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/kkiy4t9983gsy6bj/branch/master?svg=true)](https://ci.appveyor.com/project/pcmind/leveldb/branch/master)
-[![Coverage Status](https://coveralls.io/repos/github/pcmind/leveldb/badge.svg?branch=master)](https://coveralls.io/github/pcmind/leveldb?branch=master) 
 
 ## About this fork
 This is a rewrite (port) of [LevelDB](https://github.com/google/leveldb) in
@@ -47,11 +43,11 @@ to enable merges and compare compatibility with [fusesource/leveldbjni](https://
 
 ## Adding leveldb to your build
 
-In a Maven project, include the `io.github.pcmind:leveldb` artifact in the dependencies section
+In a Maven project, include the `com.brinqa:leveldb` artifact in the dependencies section
 of your `pom.xml`:
 ```xml
 <dependency>
-    <groupId>io.github.pcmind</groupId>
+    <groupId>com.brinqa</groupId>
     <artifactId>leveldb</artifactId>
     <classifier>uber</classifier>
     <version>1.2</version>
